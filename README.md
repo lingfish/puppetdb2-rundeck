@@ -1,28 +1,34 @@
+## puppetdb_rundeck module
+
+This module sets up puppetdb-rundeck to run under passenger and expose all host data in PuppetDB, incuding fact, to rundeck.
+
+
+## Class puppetdb_rundeck
+
+# Options
+
+    with_sinatra	: Manage sinatra gem (default true)
+    approot		: Application root
+    servername		: Apache server name
+    port		: Port (default 8888)
+    puppetdb_port       : PuppetDB port (default 8080)
+    puppetdb_host       : PuppetDB host (default localhost)
+    owner               : Ownership of app files (apache user)
+    group               : Group of app files (apache group)
+
+
+
 #puppetdb-rundeck
 Based on the project https://github.com/martin2110/puppetdb-rundeck, modified to expose facts and add documentation.
 
 sinatra app that glues puppetdb and rundeck together. 
 
-Requires sinatra 
-
 set host_uri and port in the script
 
 ##Installation
-###Application Configuration
-Create the directory structure for the application as follows:
-/path/to/application
-/path/to/application/public
 
-The "public" directory should be empty.  The apache configuration (below) should use the public directory as the DocumentRoot.
+    class { 'puppetdb_rundeck': }
 
-Place both config.ru and puppetdb-rundeck.rb into the "application" directory. Edit puppetdb-rundeck.rb to set puppetdb_host and puppetdb_port to match your environment, as applicable.  Note that most installs of puppetdb will only listen to http:// requests from localhost.  SSL connections have not been tested.
-
-###Apache Configuration
-Copy the puppetdb-rundeck.conf file into your apache's configuration directory (on RHEL, this is /etc/httpd/conf.d).
-
-Mofify the file to ensure the path to the application's "public" directory is correct.  You may also change the listening port (default is 8888).
-
-Restart apache (on RHEL/derivatives: service httpd restart)
 
 ##Usage
 Within your rundeck project configuration, add a Resource Model Source of type "URL Source", pointing at the machine that this web application is running on, port 8888 (or whatever you've configured it to use per the Apache configuration)

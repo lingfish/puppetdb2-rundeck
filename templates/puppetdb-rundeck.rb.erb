@@ -7,9 +7,9 @@ require 'yaml'
 require 'sinatra'
 
 # Base URL of the PuppetDB database.  Do not include a trailing slash!
-host_uri = 'http://localhost'
+host_uri = 'http://<%= @puppetdb_host %>'
 # Port number for the PuppetDB REST interface -- default is 8080 for clear, 8081 for SSL.
-port = '8080'
+port = '<%= @puppetdb_port %>'
 
 puppetdb_resource_query = {'query'=>'["=", "type", "Class"],]'}
 
