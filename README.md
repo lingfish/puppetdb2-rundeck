@@ -55,12 +55,12 @@ All known facts exposed to Rundeck can be viewed by looking at the "nodes" tab a
 
 ### Maintainers
 
-Craig Dunn (crayfishx)
-Mark Cartwright (sirloper)
+* Craig Dunn (crayfishx)
+* Mark Cartwright (sirloper)
 
 ### Contributors
 
-Original code developed by martin2110 https://github.com/martin2110/puppetdb-rundeck
+* Original code developed by martin2110 https://github.com/martin2110/puppetdb-rundeck
 
 
 ## License
