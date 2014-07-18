@@ -1,0 +1,8 @@
+{
+  "README.md": "39c5e2e3dab4da0978d817f1ab6fe287",
+  "manifests/init.pp": "4496fa69971a15b345277fee6d024c86",
+  "manifests/params.pp": "3e06c649bd194b9d02d6768cda37bc10",
+  "metadata.json": "f65755956775e6990b0974114ccf08c2",
+  "templates/config.ru.erb": "c037cdad75edabf71da36c61a21644d4",
+  "templates/puppetdb-rundeck.rb.erb": "c1fe25912a5bb69957d7697671323696"
+}
