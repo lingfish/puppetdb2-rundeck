@@ -5,7 +5,7 @@ This module sets up puppetdb-rundeck to run under passenger and expose all host 
 
 ## Class puppetdb_rundeck
 
-# Options
+### Options
 
 * `with_sinatra` : Manage sinatra gem (default true)
 * `approot` : Application root
@@ -18,19 +18,19 @@ This module sets up puppetdb-rundeck to run under passenger and expose all host 
 
 
 
-#puppetdb-rundeck
+## puppetdb-rundeck
 Based on the project https://github.com/martin2110/puppetdb-rundeck, modified to expose facts and add documentation.
 
 sinatra app that glues puppetdb and rundeck together. 
 
 set host_uri and port in the script
 
-##Installation
+## Installation
 
     class { 'puppetdb_rundeck': }
 
 
-##Usage
+## Usage
 Within your rundeck project configuration, add a Resource Model Source of type "URL Source", pointing at the machine that this web application is running on, port 8888 (or whatever you've configured it to use per the Apache configuration)
 
 Example:
