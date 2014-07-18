@@ -7,14 +7,14 @@ This module sets up puppetdb-rundeck to run under passenger and expose all host 
 
 # Options
 
-    with_sinatra	: Manage sinatra gem (default true)
-    approot		: Application root
-    servername		: Apache server name
-    port		: Port (default 8888)
-    puppetdb_port       : PuppetDB port (default 8080)
-    puppetdb_host       : PuppetDB host (default localhost)
-    owner               : Ownership of app files (apache user)
-    group               : Group of app files (apache group)
+* `with_sinatra` : Manage sinatra gem (default true)
+* `approot` : Application root
+* `servername` : Apache server name
+* `port` : Port (default 8888)
+* `puppetdb_port` : PuppetDB port (default 8080)
+* `puppetdb_host` : PuppetDB host (default localhost)
+* `owner` : Ownership of app files (apache user)
+* `group` : Group of app files (apache group)
 
 
 
