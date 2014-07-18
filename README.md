@@ -63,3 +63,6 @@ Mark Cartwright (sirloper)
 Original code developed by martin2110 https://github.com/martin2110/puppetdb-rundeck
 
 
+## License
+
+Licensed under the Apache 2.0 licence.
