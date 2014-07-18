@@ -51,4 +51,15 @@ This plugin exposes both classes and facts of all nodes known by PuppetDB to Run
 All known facts exposed to Rundeck can be viewed by looking at the "nodes" tab and expanding any of the nodes listed below.  They are listed in the format of "Fact (attribute): Value".  Note that this list can be quite long depending on your environment.  This DOES include custom facts.
 
 
+## Credits
+
+### Maintainers
+
+Craig Dunn (crayfishx)
+Mark Cartwright (sirloper)
+
+### Contributors
+
+Original code developed by martin2110 https://github.com/martin2110/puppetdb-rundeck
+
 
