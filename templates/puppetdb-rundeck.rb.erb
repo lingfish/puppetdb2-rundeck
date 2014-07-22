@@ -54,6 +54,7 @@ get '/' do
 	host     = d['certname']
 	name     = d['name']
 	value	 = d['value']
+  rundeck_resources[host] ||= {}
 	rundeck_resources[host][name] = value
 	}
 
