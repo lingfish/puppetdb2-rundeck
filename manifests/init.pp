@@ -1,17 +1,27 @@
 class puppetdb_rundeck (
-  $with_sinatra   = $puppetdb_rundeck::params::with_sinatra,
-  $approot        = $puppetdb_rundeck::params::approot,
-  $servername     = $puppetdb_rundeck::params::servername,
-  $port           = $puppetdb_rundeck::params::port,
-  $puppetdb_port  = $puppetdb_rundeck::params::puppetdb_port,
-  $puppetdb_host  = $puppetdb_rundeck::params::puppetdb_host,
-  $owner          = $puppetdb_rundeck::params::owner,
-  $group          = $puppetdb_rundeck::params::group
+  $with_sinatra         = $puppetdb_rundeck::params::with_sinatra,
+  $approot              = $puppetdb_rundeck::params::approot,
+  $servername           = $puppetdb_rundeck::params::servername,
+  $port                 = $puppetdb_rundeck::params::port,
+  $puppetdb_port        = $puppetdb_rundeck::params::puppetdb_port,
+  $puppetdb_host        = $puppetdb_rundeck::params::puppetdb_host,
+  $owner                = $puppetdb_rundeck::params::owner,
+  $group                = $puppetdb_rundeck::params::group,
+  $default_mods         = $puppetdb_rundeck::params::default_mods,
+  $default_vhost        = $puppetdb_rundeck::params::default_vhost,
+  $default_confd_files  = $puppetdb_rundeck::params::default_confd_files,
 ) inherits puppetdb_rundeck::params {
 
 
-  include apache
-  include apache::mod::passenger
+  class { 'apache':
+    default_mods        => $default_mods,
+    default_vhost       => $default_vhost,
+    default_confd_files => $default_confd_files,
+  }
+
+  class { 'apache::mod::passenger':
+    before => Service['httpd'],
+  }
 
   if $with_sinatra == true {
     if (!defined(Package['sinatra'])) {
@@ -25,7 +35,7 @@ class puppetdb_rundeck (
 
   File {
     owner => $owner,
-    group => $group
+    group => $group,
   }
 
   file { [
@@ -57,7 +67,7 @@ class puppetdb_rundeck (
     directories     => [
       {
         path            => "${approot}/rack/public",
-        options         => 'Indexes -Multiviews',
+        options         => 'Indexes Multiviews',
         allow_override  => 'None',
         order           => 'allow,deny',
         allow           => 'from all'
@@ -70,6 +80,7 @@ class puppetdb_rundeck (
         allow_from      => 'all',
       }
     ],
+    before          => Service['httpd'],
     require         => File["${approot}/rack/config.ru","${approot}/rack/puppetdb-rundeck.rb"],
   }
 }
