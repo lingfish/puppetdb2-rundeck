@@ -29,19 +29,19 @@ get '/' do
 
   rundeck_resources = Hash.new
   puppetdb_data.each{|d|
-  host     = d['certname']
-  title    = d['title']
-  rundeck_resources[host] = Hash.new if not rundeck_resources.key?(host)
-  rundeck_resources[host]['tags'] = Array.new if not rundeck_resources[host].key?('tags')
-  rundeck_resources[host]['tags'] << title
+    host     = d['certname']
+    title    = d['title']
+    rundeck_resources[host] = Hash.new if not rundeck_resources.key?(host)
+    rundeck_resources[host]['tags'] = Array.new if not rundeck_resources[host].key?('tags')
+    rundeck_resources[host]['tags'] << title
   }
-  
+
   rundeck_resources.keys.sort.each { |k|
-  rundeck_resources[k]['tags'].uniq!
-  rundeck_resources[k]['tags'] =  rundeck_resources[k]['tags'].join(",")
-  rundeck_resources[k]['hostname'] = k
+    rundeck_resources[k]['tags'].uniq!
+    rundeck_resources[k]['tags'] =  rundeck_resources[k]['tags'].join(",")
+    rundeck_resources[k]['hostname'] = k
   }
-  
+
   uri = URI.parse( "#{host_uri}:#{port}/v3/facts" )
   http = Net::HTTP.new(uri.host, uri.port) 
   request = Net::HTTP::Get.new(uri.path) 
@@ -49,13 +49,14 @@ get '/' do
   request.add_field("Accept", "application/json")
   response = http.request(request)
   puppetdb_data = JSON.parse(response.body)
-    
+
   puppetdb_data.each{|d|
-  host     = d['certname']
-  name     = d['name'] if d['name'] != "hostname"
-  value    = d['value'] if d['name'] != "hostname"
-  rundeck_resources[host] ||= {}
-  rundeck_resources[host][name] = value
+    next if d['name'] == "hostname"
+    host     = d['certname']
+    name     = d['name']
+    value    = d['value']
+    rundeck_resources[host] ||= {}
+    rundeck_resources[host][name] = value
   }
 
   rundeck_resources.to_yaml
