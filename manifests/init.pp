@@ -13,15 +13,8 @@ class puppetdb_rundeck (
 ) inherits puppetdb_rundeck::params {
 
 
-  class { 'apache':
-    default_mods        => $default_mods,
-    default_vhost       => $default_vhost,
-    default_confd_files => $default_confd_files,
-  }
-
-  class { 'apache::mod::passenger':
-    before => Service['httpd'],
-  }
+  include apache
+  include apache::mod::passenger
 
   if $with_sinatra == true {
     if (!defined(Package['sinatra'])) {
